@@ -1,6 +1,8 @@
 import 'package:evently_c14/core/models/event_model.dart';
+import 'package:evently_c14/modules/layout/manager/layout_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/theme/app_colros.dart';
 
@@ -16,6 +18,7 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<LayoutProvider>(context);
     return Container(
       padding: const EdgeInsets.all(8),
       height: 200,
@@ -68,9 +71,14 @@ class CardWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                const Icon(
-                  Icons.favorite,
-                  color: AppColors.primary,
+                InkWell(
+                  onTap: () {
+                    provider.toggleFav(event);
+                  },
+                  child:  Icon(
+                    event.isFav ? Icons.favorite : Icons.favorite_border,
+                    color: AppColors.primary,
+                  ),
                 )
               ],
             ),

@@ -13,6 +13,7 @@ class LayoutProvider extends ChangeNotifier {
   User get user => FirebaseAuth.instance.currentUser!;
 
   List<EventModel> events = [];
+  List<EventModel> favEvents = [];
   int tabIndex = 0;
   void onChangeTab(int index) {
     tabIndex = index;
@@ -38,11 +39,29 @@ class LayoutProvider extends ChangeNotifier {
     if (tabIndex > 0) {
       id = AppCategory.categories[tabIndex - 1].id.toString();
     }
-    events.clear();
     var data = await FireBaseFireStoreServices.getEvents(id);
+    events.clear();
+
     for (var e in data) {
       events.add(e.data());
     }
+    notifyListeners();
+  }
+
+  Future<void> getFav() async {
+    favEvents.clear();
+    var data = await FireBaseFireStoreServices.getFav();
+    for (var e in data) {
+      favEvents.add(e.data());
+    }
+    notifyListeners();
+  }
+
+  Future<void> toggleFav(EventModel model) async {
+    model.isFav = !model.isFav;
+    await FireBaseFireStoreServices.toggleFav(model);
+    getFav();
+    getEvents();
     notifyListeners();
   }
 }

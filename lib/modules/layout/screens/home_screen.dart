@@ -5,7 +5,6 @@ import 'package:evently_c14/modules/layout/manager/layout_provider.dart';
 import 'package:evently_c14/modules/layout/widgets/tab_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,10 +22,12 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             width: double.infinity,
             decoration: const BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(25),
-                    bottomRight: Radius.circular(25))),
+              color: AppColors.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
+            ),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,8 +65,9 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8)),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Text(appProvider.lang.toUpperCase(),
                             style: theme.textTheme.bodySmall
                                 ?.copyWith(color: AppColors.primary)),

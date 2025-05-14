@@ -41,10 +41,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
         validator: widget.validator,
         controller: widget.controller,
         obscureText: obscureText,
-        maxLines: null,
-        minLines: null,
+        maxLines: widget.isPassword ? 1 : null,
+        minLines: widget.isPassword ? 1 : null,
         //
-        expands: true,
+        expands: widget.isPassword ? false : true,
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus!.unfocus();
         },
